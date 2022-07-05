@@ -8,4 +8,21 @@ try {
     console.log(error)
     res.send({error});
 }
-}
+};
+
+exports.login = async (req, res) => {
+    try {
+        const user = await User.findOne({
+            username: req.body.username,
+            password: req.body.password,
+        });
+        if (!user) {
+            throw new error("incorrect credentials");
+        } else {
+            res.send({ user });
+        }
+    } catch (error) {
+        console.log(error);
+        res.send({ error });
+    }
+};
